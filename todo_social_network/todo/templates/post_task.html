@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div>
+<p>Автор: {{todo.author.name}}</p>
+<p>Задача {{todo.text}}</p>
+<p>Сделать до {{todo.deadline}}</p>
+</div>
+<h1>Комментарии</h1>
+<div>
+    {% for com in comments %}
+    <div class="comment_container">
+        {% if not user.photo_user %}
+            <img class="avatar_commentator" src="{% static "no_avatar.jpg" %}">
+        {% else %}
+            <img class="avatar_commentator" src="{{user.photo_user.url }}">
+        {% endif %}
+        <span class="username_comm"><b>{{com.author.name}}</b></span><span class="text_comment">{{com.text}}</span>{% if com.author == user %}
+            <form method="post" action="{% url 'delete_komm' %}">{% csrf_token %}<button class="button_delete" type="submit" name="id" value="{{com.id}}">Удалить</button></form>{% endif %}
+    </div>
+    {% empty %}
+    <p>Здесь пока нет комментариев будь первым</p>
+    {% endfor %}
+</div>
+<form  method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="submit" value="Add">Добавить</button>
+</form>
+{% endblock content %}
+{% block title %}Комментарии{% endblock title %}

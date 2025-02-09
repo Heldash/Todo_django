@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Добавить задачу</h1>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="submit" value="Add">Добавить</button>
+</form>
+{% else %}
+<h1>Добавление задач доступно для авторизованных пользователей. <a href="{% url 'login' %}">Войти</a></h1>
+{% endif %}
+{% endblock content %}
+{% block title %}Добавить{% endblock title %}

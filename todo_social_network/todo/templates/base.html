@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock title %}</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "style.css" %}" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ccc;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #444;
+            text-align: center; /* step 6 */
+        }
+        nav li {
+          display: inline-block; /* step 1 */
+          width: 20%; /* step 4 */
+          margin-right: -4px; /* step 5 */
+        }
+        nav a {
+          display: block; /* step 2 */
+          text-decoration: none; /* step 3 */
+        }
+        /* common text style */
+        nav a {
+          font-family: sans-serif;
+          height: 40%; /* vertically center */
+          line-height: 40%; /* vertically center */
+          color: #fff;
+        }
+        nav a:hover {
+          background-color: #005f5f;
+        }
+         
+        nav a.active {
+          background-color: #eee;
+          color: #444;
+          cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="{% url "home" %}">Home</a></li>
+          <li><a href="{% url "users" %}">Users</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url "add_todo" %}">Add task</a></li>
+            <li><a href="{% url "logout" %}">logout</a></li>
+          {% else %}
+            <li><a href="{% url "login" %}">Login</a></li>
+          {% endif %}
+        </ul>
+    </nav>
+    {% block content %}{% endblock content %}
+</body>
+</html>

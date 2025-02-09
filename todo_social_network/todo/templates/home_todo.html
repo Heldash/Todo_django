@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{name}}</h1>
+{% for todo in todo_list %}
+<div>
+    <p>Автор: {{todo.author.name}}</p>
+    <p>Задача: {{todo.text}}</p>
+    <p>Сделать до {{todo.deadline}}</p>
+    <p><a>{{todo.likes}} нравится</a> <a href="{% url 'comment' %}?id={{ todo.id }}">Комментарии</a></p>
+    {% if todo.author == user %}
+    <form method="post" action="{% url "delete" %}">
+        {% csrf_token %}
+        <button name="id" value={{todo.id}}>Удалить</button>
+    </form>
+    {% endif %}
+</div>
+{% empty %}
+<h1>Нет дел на данный момент</h1>
+{% endfor %}
+
+{% endblock content %}

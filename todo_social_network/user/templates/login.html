@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+{% if message is not None %}
+<h1 color="red">{{message}}</h1>
+{% endif %}
+<h1>Вход</h1>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="submit" value="login">Войти</button>
+</form>
+<h3>Нет аккаунта? <p><a href="{% url 'signup' %}">Зарегестрироваться</a></p></h3>
+</body>
+</html>
