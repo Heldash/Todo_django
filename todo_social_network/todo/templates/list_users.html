@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 {% for user in users %}
-<p><a href="{% url "users" %}?id={{user.id}}">{{user.name}}</a></p>
+<p><div class="ml-3 flex-col bg-slate-100 border-solid border-2 rounded-md w-96">
+    <a href="{% url "users" %}?id={{user.id}}">
+    {% if not user.photo_user %}
+            <img class="rounded-md h-32 w-auto" src="{% static "no_avatar.jpg" %}">
+        {% else %}
+            <img class="rounded-md h-32" src="{{user.photo_user.url }}">
+        {% endif %}
+        <div>
+    {{user.name}}</div></a></div></p>
 {% empty %}
 {% endfor %}
 {% endblock content %}
