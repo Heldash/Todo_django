@@ -1,0 +1,33 @@
+.comment_container {
+    border: 2px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+    position: relative;
+    box-sizing: content-box;
+    clear:both
+}
+.avatar_commentator {
+    border-radius: 10px;
+    height: 150px;
+    margin: 5px;
+    float: left;
+}
+.avatar_commentator,.text_comment,.username_comm{
+    display: block;
+}
+.text_comment{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.username_comm{
+    margin-left: 10px
+}
+.button_delete{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
